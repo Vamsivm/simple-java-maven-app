@@ -28,10 +28,12 @@ pipeline {
         }
         stage('Deliver') {
             steps {
+                withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ){
                 sh '''
                     chmod +x ./jenkins/scripts/deliver.sh
                     ./jenkins/scripts/deliver.sh
                 '''
+                }
             }
         }
     }
