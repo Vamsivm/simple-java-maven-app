@@ -1,0 +1,9 @@
+applications:
+- name: first-job
+  instances: 1
+  memory: 64M
+  path: /var/jenkins_home/workspace/first-job/target/my-app-1.0-SNAPSHOT.jar
+  timeout: 120
+  routes:
+  - route: first-job.cfapps.io
+  buildpack: https://github.com/cloudfoundry/java-buildpack
