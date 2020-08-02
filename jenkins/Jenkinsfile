@@ -12,28 +12,15 @@ pipeline {
                 
             }
         }
-        stage('Test') {
+        
+		stage('Deploy') {
             steps {
-                withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
-                 //sh "mvn clean package"
-                    sh 'mvn test'
-                }
-               
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
-        stage('Deliver') {
-            steps {
-                withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ){
-                sh '''
-                    chmod +x ./jenkins/scripts/deliver.sh
-                    ./jenkins/scripts/deliver.sh
-                '''
-                }
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'pcf',
+				usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
+			]){
+			
+				sh 'cf login -a  https://api.run.pivotal.io -u vamsi111087@gmail.com - p @Lakshya123 -s development -o Vamsi11'
+			}
             }
         }
     }
