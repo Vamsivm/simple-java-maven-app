@@ -16,7 +16,7 @@ pipeline {
 		stage('Deploy') {
             steps {
                 pushToCloudFoundry(
-			  target: 'api.run.pivotal.io',
+			  target: 'https://api.run.pivotal.io',
 			  organization: 'Vamsi11',
 			  cloudSpace: 'development',
 			  credentialsId: 'pcf',
